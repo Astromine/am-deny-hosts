@@ -1,0 +1,111 @@
+#!/bin/sh
+
+# This file is licensed to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# -----------------------------------------------------------------------------
+# This Script creates a hosts.deny file from one or more IP blacklists
+# -----------------------------------------------------------------------------
+#
+WORK_DIR="/tmp/hosts_deny"
+BADIPS_URL="https://www.badips.com/get/list/ssh/2?age=7d"
+BLOCKLIST_URL="https://lists.blocklist.de/lists/ssh.txt"
+GREENSNOW_URL="http://blocklist.greensnow.co/greensnow.txt"
+BADIPS_ORIG="${WORK_DIR}/badips.txt"
+BLOCKLIST_ORIG="${WORK_DIR}/blocklist.txt"
+GREENSNOW_ORIG="${WORK_DIR}/greensnow.txt"
+BL_STRIPPED="${WORK_DIR}/bl_stripped.txt"
+BL_SORTED="${WORK_DIR}/bl_sorted.txt"
+HOSTS_DENY="hosts.deny"
+HD_HEADER="${WORK_DIR}/hd_header.txt"
+HD_STRIPPED="${WORK_DIR}/hd_stripped.txt"
+HD_SORTED="${WORK_DIR}/hd_sorted.txt"
+HD_LATEST="${WORK_DIR}/hd_latest.txt"
+#
+# Remove the existing work directory
+#
+if [ -d "${WORK_DIR}" ] 
+then
+   rm -r "${WORK_DIR}"
+fi
+#
+# create the working directory
+#
+mkdir "${WORK_DIR}"
+#
+# Get the latest black list
+#
+wget -q -O "${BADIPS_ORIG}" "${BADIPS_URL}"
+wget -q -O "${BLOCKLIST_ORIG}" "${BLOCKLIST_URL}"
+wget -q -O "${GREENSNOW_ORIG}" "${GREENSNOW_URL}"
+
+#
+# Remove comments and blank lines from the black list
+#
+if [ -s "${BADIPS_ORIG}" ]
+then
+    cat "${BADIPS_ORIG}"    | sed 's/^#.*//' | grep -v '^$' > "${BL_STRIPPED}"
+fi
+
+if [ -s "${BLOCKLIST_ORIG}" ]
+then
+    cat "${BLOCKLIST_ORIG}" | sed 's/^#.*//' | grep -v '^$' >> "${BL_STRIPPED}"
+fi
+
+if [ -s "${GREENSNOW_ORIG}" ]
+then
+    cat "${GREENSNOW_ORIG}" | sed 's/^#.*//' | grep -v '^$' >> "${BL_STRIPPED}"
+fi
+
+#
+# If there is no new data to work with then stop here
+#
+if [ ! -s "${BL_STRIPPED}" ]
+then
+    echo "Failed to download SSH blacklist"
+    exit 2
+fi
+
+#
+# Copy existing host deny to the working directory
+#
+cp "/etc/${HOSTS_DENY}" "${WORK_DIR}"
+
+
+#
+# Remove the Comments from the hosts.deny file into separate files
+#
+cat "${WORK_DIR}/${HOSTS_DENY}" | sed 's/^#.*//' | grep -v '^$' > "${HD_STRIPPED}"
+grep '^#' "${WORK_DIR}/${HOSTS_DENY}" > "${HD_HEADER}"
+
+#
+# Get the latest fails 
+#
+cat /var/log/auth.log.1 /var/log/auth.log  | grep "Failed" | sed -e 's/^.*: //'  -e 's/^.*from //' -e 's/ port.*ssh.*$//' | sort | uniq  > "${HD_LATEST}"
+
+#
+# sorting the black list and the host deny
+#
+cat     "$BL_STRIPPED" | sort > "$BL_SORTED"
+uniq    "$BL_SORTED" | sed 's/^/sshd: /' > "${WORK_DIR}/bl_new.txt"
+
+cat     "${BL_SORTED}" "${HD_LATEST}" | sort  > "$HD_SORTED"
+uniq -d "$HD_SORTED" > "${WORK_DIR}/bl_dups.txt"
+uniq -c "$HD_SORTED" | grep -v '1 ' > "${WORK_DIR}/bl_count.txt" 
+#
+# Reconstruct host deny
+#
+cat "${HD_HEADER}" "${WORK_DIR}/bl_new.txt" > "${WORK_DIR}/${HOSTS_DENY}"
+if [ -s "${WORK_DIR}/bl_new.txt" ]
+then
+    cp "${WORK_DIR}/${HOSTS_DENY}" "/etc/${HOSTS_DENY}"
+fi
