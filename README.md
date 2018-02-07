@@ -1,4 +1,4 @@
-# am-deny-hosts
+authenticating# am-deny-hosts
 This application provides a set of shell scripts that helps to protect your Linux server from SSH attacks by applying IP block lists to your hosts.deny file. The solution uses minimum resources on your server.
 
 One of the most annoying consequences of operating a public server on the internet is the amount of SSH attacks it will experience. You simply have to view your /var/log/auth.log to see what we mean. Since your server is publicly available you cannot prevent these attacks. What you can do is block them. 
@@ -17,6 +17,11 @@ The **am-deny-hosts** script updates your /etc/hosts.deny file using downloaded 
 
 The **am-list-fails** script captures a list of unique IP address that exceeded a maximum number of authentication attempts with your server. The default maximum number of attempts is set to 10. This should prevent including legitimate users who might of forgotten their password or used an unrecognized public key.
 
+The **am-latest-fails** script generates the IP addresses of the most recent attackers. It does the same job as the **am-list-fails** by capturing data the most recent auth.log file.
+
 The **am-list-logins** script lists the hosts that were recently successful authenticating with your server. You can use this report to do a paranoia check that would help to verify that a successful attack did not occur.
 
-The **am-login-ips** script generate a uniques list of IP addresses were recently successful  with your server
+The **am-login-ips** script generates a uniques list of IP addresses that recently authenticated successfully with your server. Use can add this list to your **hosts.allow** file but it is not typically necessary.
+
+The **am-list-refused** script generates a uniques list of IP addresses of hosts that were refused a connection to your server. The report lets you analyse the success rate for blocking SSH attackers. Typically an attacker will cease and desist when they are refused a connection. 
+
