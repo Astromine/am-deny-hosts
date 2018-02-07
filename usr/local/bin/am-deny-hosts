@@ -30,6 +30,13 @@ HD_HEADER="${WORK_DIR}/hd_header.txt"
 HD_STRIPPED="${WORK_DIR}/hd_stripped.txt"
 HD_SORTED="${WORK_DIR}/hd_sorted.txt"
 HD_LATEST="${WORK_DIR}/hd_latest.txt"
+AM_CFG="/etc/default/am-deny-hosts"
+
+#
+# Read am-deny-hosts default configuration when it is present 
+#
+[ -r "$AM_CFG" ] && . "${AM_CFG}"
+
 #
 # Remove the existing work directory
 #
@@ -44,9 +51,9 @@ mkdir "${WORK_DIR}"
 #
 # Get the latest black list
 #
-wget -q -O "${BADIPS_ORIG}" "${BADIPS_URL}"
-wget -q -O "${BLOCKLIST_ORIG}" "${BLOCKLIST_URL}"
-wget -q -O "${GREENSNOW_ORIG}" "${GREENSNOW_URL}"
+wget -q  -O "${BADIPS_ORIG}"    "${BADIPS_URL}"
+wget -q  -O "${BLOCKLIST_ORIG}" "${BLOCKLIST_URL}"
+wget -q  -O "${GREENSNOW_ORIG}" "${GREENSNOW_URL}"
 
 #
 # Remove comments and blank lines from the black list
@@ -65,7 +72,10 @@ if [ -s "${GREENSNOW_ORIG}" ]
 then
     cat "${GREENSNOW_ORIG}" | sed 's/^#.*//' | grep -v '^$' >> "${BL_STRIPPED}"
 fi
-
+#
+# Get the latest fails 
+#
+am-list-fails >> "${HD_LATEST}"
 #
 # If there is no new data to work with then stop here
 #
@@ -88,24 +98,19 @@ cat "${WORK_DIR}/${HOSTS_DENY}" | sed 's/^#.*//' | grep -v '^$' > "${HD_STRIPPED
 grep '^#' "${WORK_DIR}/${HOSTS_DENY}" > "${HD_HEADER}"
 
 #
-# Get the latest fails 
+# Sort the black list, Strip out duplicates, and prepend the SSH protocol indicator 
 #
-cat /var/log/auth.log.1 /var/log/auth.log  | grep "Failed" | sed -e 's/^.*: //'  -e 's/^.*from //' -e 's/ port.*ssh.*$//' | sort | uniq  > "${HD_LATEST}"
-
+cat    "${BL_STRIPPED}" "${HD_LATEST}" | sort | uniq | sed 's/^/sshd: /' > "${WORK_DIR}/bl_new.txt"
 #
-# sorting the black list and the host deny
+# Create statistical check files 
 #
-cat     "$BL_STRIPPED" | sort > "$BL_SORTED"
-uniq    "$BL_SORTED" | sed 's/^/sshd: /' > "${WORK_DIR}/bl_new.txt"
-
-cat     "${BL_SORTED}" "${HD_LATEST}" | sort  > "$HD_SORTED"
+cat    "${BL_STRIPPED}" "${HD_LATEST}" | sort  > "$HD_SORTED"
 uniq -d "$HD_SORTED" > "${WORK_DIR}/bl_dups.txt"
 uniq -c "$HD_SORTED" | grep -v '1 ' > "${WORK_DIR}/bl_count.txt" 
 #
-# Reconstruct host deny
+# Reconstruct and replace the original hosts.deny file 
 #
-cat "${HD_HEADER}" "${WORK_DIR}/bl_new.txt" > "${WORK_DIR}/${HOSTS_DENY}"
 if [ -s "${WORK_DIR}/bl_new.txt" ]
 then
-    cp "${WORK_DIR}/${HOSTS_DENY}" "/etc/${HOSTS_DENY}"
+    cat "${HD_HEADER}" "${WORK_DIR}/bl_new.txt" >  "/etc/${HOSTS_DENY}"
 fi
