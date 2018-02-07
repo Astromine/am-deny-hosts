@@ -65,3 +65,9 @@ If you like this solution and/or find it useful, please support our efforts to k
 |:-------------:| :-----:|
 | [![PayPal.me](https://www.astromine.com/musicIcons/paypalMe.jpg)](https://www.paypal.me/ASTROMINE) | [![Credit Card](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5UZH27L79T5KS) |
 
+## License
+Copyright 2016 Stephen Fox, All Rights Reserved.
+
+This software is licensed to you under the Apache License, Version 2.0 (the "License"). You may not use this software except in compliance with the License.  You may obtain a copy of the License at [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
