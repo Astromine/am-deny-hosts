@@ -58,9 +58,10 @@ When you use the **am-deny-hosts** application to protect your Linux server(s) f
 * The software uses data from your own servers authentication logs to augment the publicly available black lists.
 * The software effectively minimizes the risk that an attacker will compromise your machine.
 
-## Support the Authors
+## Support This Project
 If you like this solution and/or find it useful, please support our efforts to keep the software up to date. Here are your options
 
-* Buy us a coffee with [PayPal.me](https://www.paypal.me/ASTROMINE) 
-* Donate with paypay [![](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5UZH27L79T5KS)
+| You have a Paypal Account | Use a Credit Card |
+|:-------------:| :-----:|
+| [![PayPal.me](https://www.astromine.com/musicIcons/paypalMe.jpg)](https://www.paypal.me/ASTROMINE) | [![Credit Card](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5UZH27L79T5KS) |
 
