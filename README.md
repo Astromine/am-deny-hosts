@@ -45,6 +45,9 @@ The **am-list-logins** script lists the hosts that were recently successful auth
 The **am-login-ips** script generates a uniques list of IP addresses that recently authenticated successfully with your server. Use can add this list to your **hosts.allow** file but it is not typically necessary.
 
 The **am-list-refused** script generates a uniques list of IP addresses of hosts that were refused a connection to your server. The report lets you analyse the success rate for blocking SSH attackers. Typically an attacker will cease and desist when they are refused a connection. 
+## Getting Support
+
+We will be happy to help you install the application and respond to issues you may discover with **am-deny-hosts** scripts. If you discover and issue or have a question please create an issue on this project using the github system.  
 
 ## Benefits
 When you use the **am-deny-hosts** application to protect your Linux server(s) from SSH attacks we expect you to see the following benefits:
