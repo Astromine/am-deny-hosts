@@ -16,5 +16,4 @@
 # This Script lists the latest successful logins that were recorded in the  
 # /etc/var/auth.log.N files 
 # -----------------------------------------------------------------------------
-cat  /var/log/auth.log      | grep -e "Accepted password" -e "Accepted publickey"
-cat  /var/log/auth.log.1    | grep -e "Accepted password" -e "Accepted publickey"
+cat  /var/log/auth.log.1 /var/log/auth.log | grep -e "Accepted password" -e "Accepted publickey"
