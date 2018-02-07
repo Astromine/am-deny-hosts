@@ -18,7 +18,7 @@ The shell scripts were tested on many versions of **Debian** and **Ubuntu**. The
 
 ## Installation Instructions
 
-1. [Download](/archive/master.zip) the application scripts to your server.
+1. [Download](https://github.com/Stephenglfox/am-deny-hosts/archive/master.zip) the application scripts to your server.
 2. Copy the scripts located in `/usr/local/bin/` to a directory within your PATH environment. we recommend using the `/usr/local/bin/` directory since it is usually in your system PATH by default. 
 3. Use the `chmod` command to set the permissions of the scripts to 755. This allows it to be executed by anyone but it will not allowed overwriting of your `/etc/hosts.deny` except by the root user.
 4. Optionally, use the `chown` command to set the owner and group of the scripts to `root`. You have to be the root user to accomplish this successfully.
