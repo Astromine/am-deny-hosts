@@ -28,7 +28,7 @@ The shell scripts were tested on many versions of **Debian** and **Ubuntu**. The
     # Redirect stderr and stdout output to /tmp/am-deny-hosts.log
     10 0 * * * /user/local/bin/am-deny-hosts >> /tmp/am-deny-hosts.log 2>&1
 ```
-6. Activate the crontab to run the am-deny-hosts daily. An example instruction follows.
+6. Activate the crontab to run the **am-deny-hosts** script daily. An example instruction follows.
 ```
     crontab <crontabDirectory>/<crontabFileName>
 ```
@@ -46,7 +46,16 @@ The **am-login-ips** script generates a uniques list of IP addresses that recent
 
 The **am-list-refused** script generates a uniques list of IP addresses of hosts that were refused a connection to your server. The report lets you analyse the success rate for blocking SSH attackers. Typically an attacker will cease and desist when they are refused a connection. 
 
-## Support the Author
+## Benefits
+When you use the **am-deny-hosts** application to protect your Linux server(s) from SSH attacks we expect you to see the following benefits:
+
+* The software is easy to install and setup making it ideal for users of all knowledge levels. 
+* The software does NOT over-burden your server or waste CPU cycles.
+* The software takes advantage of publicly available black lists of known SSH attackers.
+* The software uses data from your own servers authentication logs to augment the publicly available black lists.
+* The software effectively minimizes the risk that an attacker will compromise your machine.
+
+## Support the Authors
 If you like this solution and/or find it useful, please support our efforts to keep the software up to date. Here are your options
 
 * Buy us a coffee with [PayPal.me](https://www.paypal.me/ASTROMINE) 
