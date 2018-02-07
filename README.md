@@ -1,3 +1,4 @@
+
 # am-deny-hosts
 This application provides a set of shell scripts that helps to protect your Linux server from SSH attacks by applying IP block lists to your hosts.deny file. The solution uses minimum resources on your server.
 
@@ -22,7 +23,8 @@ The shell scripts were tested on many versions of **Debian** and **Ubuntu**. The
 4. Optionally, use the `chown` command to set the owner and group of the scripts to `root`. You have to be the root user to accomplish this successfully.
 5. Create crontab file or add a line to your existing crontab file with the following or similar contents.
 
-`# Execute am-deny-host at 10 minutes after midnight every day. Redirect stderr and stdout output` 
+`# Execute am-deny-host at 10 minutes after midnight every day. Redirect stderr and stdout output`
+
 `10 0 * * * /user/local/bin/am-deny-hosts >> /tmp/am-deny-hosts.log 2>&1`
 
 ## How am-deny-hosts works
