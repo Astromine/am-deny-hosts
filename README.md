@@ -46,3 +46,7 @@ The **am-login-ips** script generates a uniques list of IP addresses that recent
 
 The **am-list-refused** script generates a uniques list of IP addresses of hosts that were refused a connection to your server. The report lets you analyse the success rate for blocking SSH attackers. Typically an attacker will cease and desist when they are refused a connection. 
 
+## Support the Author
+If you like this solution and/or find it useful, please support our efforts to keep the software up to date. Here are your options
+
+* Buy us a coffee with [PayPal.me](https://www.paypal.me/ASTROMINE) 
