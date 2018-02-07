@@ -50,7 +50,7 @@ The **am-list-refused** script generates a uniques list of IP addresses of hosts
 When you use the **am-deny-hosts** application to protect your Linux server(s) from SSH attacks we expect you to see the following benefits:
 
 * The software is easy to install and setup making it ideal for users of all knowledge levels. 
-* The software does NOT over-burden your server or waste CPU cycles.
+* The software does NOT over-burden your server or waste CPU cycles. This makes it ideal for low power servers with a minimum amount CPU or RAM resources.
 * The software takes advantage of publicly available black lists of known SSH attackers.
 * The software uses data from your own servers authentication logs to augment the publicly available black lists.
 * The software effectively minimizes the risk that an attacker will compromise your machine.
