@@ -13,7 +13,19 @@
 # limitations under the License.
 
 # -----------------------------------------------------------------------------
-# This Script lists the IP address of potential SSH attackers
+# This Script lists the IP addresses of potential SSH attackers
+#
+# These are defined as IP address which generate more than MAX_FAILS
+# authentication messages in the auth.log file 
 # -----------------------------------------------------------------------------
 #
-cat /var/log/auth.log.1 /var/log/auth.log  | grep "Failed" | sed -e 's/^.*: //'  -e 's/ port.*$//' -e 's/^.*from //' | sort | uniq -c
+MAX_FAILS="10"
+AM_CFG="/etc/default/am-deny-hosts"
+#
+# Read am-deny-hosts default configuration when it is present 
+#
+[ -r "$AM_CFG" ] && . "${AM_CFG}"
+#
+# Get the latest login failures 
+#
+cat /var/log/auth.log  | grep "Failed" | sed -e 's/^.*: //'  -e 's/ port.*$//' -e 's/^.*from //' | sort | uniq -c | sort -nr | awk -v mc="${MAX_FAILS}" '$1 > mc {print $2}' | sort
