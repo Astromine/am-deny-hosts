@@ -63,7 +63,7 @@ If you like this solution and/or find it useful, please support our efforts to k
 
 | You have a Paypal Account | Use a Credit Card |
 |:-------------:| :-----:|
-| [![PayPal.me](https://www.astromine.com/musicIcons/paypalMe.jpg)](https://www.paypal.me/ASTROMINE "Use when you have a paypal account") | [![Credit Card](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5UZH27L79T5KS) |
+| [![PayPal.me](https://www.astromine.com/musicIcons/paypalMe.jpg)](https://www.paypal.me/ASTROMINE "Use when you have a paypal account") | [![Credit Card](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5UZH27L79T5KS "Use this when you want to pay with a credit card") |
 
 
 
