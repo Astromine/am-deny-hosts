@@ -5,7 +5,7 @@ This application provides a set of shell scripts that helps to protect your Linu
 
 One of the most annoying consequences of operating a public server on the internet is the amount of SSH attacks it will experience. You simply have to view your /var/log/auth.log to see what we mean. Since your server is publicly available you cannot prevent these attacks. What you can do is block them. 
 
-There are a few methods to block IP addresses from accessing your server. These include [Fail2Ban](https://www.fail2ban.org), [DenyHosts](http://denyhosts.sourceforge.net/), [IPTables](https://en.wikipedia.org/wiki/Iptables), and others. The problem with these solutions is that they may be resource intensive and difficult to setup.
+There are a few methods to block IP addresses from accessing your server. These include [Fail2Ban](https://www.fail2ban.org), [DenyHosts](http://denyhosts.sourceforge.net/), or [IPTables](https://en.wikipedia.org/wiki/Iptables). While these solutions can be effective, they may be resource intensive or difficult to setup.
 
 The am-deny-hosts application attempts to provide a simple, reliable, and easy to setup solution that can effectively reduce the risk that your server will be compromised by SSH attacks. This solution is also intended to minimize the resource utilization on your server and allow it to perform its function without wasting CPU cycles analysing your /var/log/auth.log file.  
 
@@ -14,7 +14,7 @@ The shell scripts delivered with this application should work on any Linux serve
 
 You should have root access to your server to operate the application successfully. You can still test the scripts without root access before requesting an administrator to install it for you. 
 
-The shell scripts were tested on many versions of **Debian** and **Ubuntu**. There is no reason the expect that they will not work successfully with other Linux flavors like **Fedora**, **CentOS**, **RedHart**, **OpenSUSE**, and others. 
+The shell scripts were tested on versions of **Debian** and **Ubuntu**. On other Linux flavors like **Fedora**, **CentOS**, **RedHart**, **OpenSUSE**, etc you should ensure that the ssh program includes the TCP wrappers library (libwrap.so.0). 
 
 ## Installation Instructions
 
