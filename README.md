@@ -65,7 +65,11 @@ If you like this solution and/or find it useful, please support our efforts to k
 |:-------------:| :-----:|
 | [![PayPal.me](https://www.astromine.com/musicIcons/paypalMe.jpg)](https://www.paypal.me/ASTROMINE "Use when you have a paypal account") | [![Credit Card](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5UZH27L79T5KS "Use this when you want to pay with a credit card") |
 
-
+| Crypto Currency | Public Key Address | QR Code | 
+|:----------------|:-------------------| :------:|
+| DogeCoin        | DAv6RrcryQFpFvPtSYGiPb8hZxvUebGEiZ | ![DogeCoin](https://www.astromine.com/musicIcons/DogeCoin-qrcode.png) |
+| Ethereum        | 0xd1497eac109f89c10b43738a204f68053dc38e91 | ![Ethereum](https://www.astromine.com/musicIcons/Ethereum-qrcode.png) |
+| LiteCoin        | LgAoxgiapyZWCfo3UTLhXBBSUGAGdR2H3M | ![Litecoin](https://www.astromine.com/musicIcons/LiteCoin-qrcode.png) |
 
 ## License
 Copyright 2016 Stephen Fox, All Rights Reserved.
