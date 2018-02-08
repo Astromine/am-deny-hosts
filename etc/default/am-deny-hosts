@@ -1,0 +1,10 @@
+# Default settings for am-deny-hosts
+#
+# This file is sourced from am-deny-hosts scripts
+#
+# MAX_FAILS sets the maximum number of authentication failures the
+# am-deny-hosts software will allow before the login attempt is 
+# recognized as an attack. 
+#
+MAX_FAILS="10"
+
