@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # -----------------------------------------------------------------------------
-# This Script lists failed login attempts recorded in auth.log
+# This Script lists failed login attempts recorded in the auth.log file
 #
 # you can override the maximum number of failures allowed by adding a number
 # as the first positional parameter
@@ -23,8 +23,11 @@ WORK_FILE="/tmp/am-fails.txt"
 MAX_FAILS="10"
 AM_CFG="/etc/default/am-deny-hosts"
 
-# Read am-deny-hosts default configuration when it is present 
-[ -r "$AM_CFG" ] && . "${AM_CFG}"
+# Read am-deny-hosts default configuration when it is present
+if [ -e "$AM_CFG" ] && [ -r "$AM_CFG" ]; 
+then 
+  . "${AM_CFG}"
+fi 
 
 #
 # use the first positional parameters for maximum number of failures allowed
@@ -42,6 +45,7 @@ then
    rm -r "${WORK_FILE}"
 fi
 
-cat  /var/log/auth.log /var/log/auth.log.1  | grep "Failed" | sed -e 's/^.*: //'  -e 's/ port.*$//' -e 's/^.*from //' | sort | uniq -c | sort -nr > ${WORK_FILE}
-cat ${WORK_FILE} | awk -v mc="${MAX_FAILS}" '$1 > mc {print $2}' | sort
+cat  /var/log/auth.log /var/log/auth.log.1  | grep "Failed" | sed -e 's/^.*: //'  -e 's/ port.*$//' -e 's/^.*from //'  > ${WORK_FILE}
+cat  /var/log/auth.log /var/log/auth.log.1  | grep "error: maximum authentication attempts" | sed -e 's/^.*: //'  -e 's/ port.*$//' -e 's/^.*from //'  >> ${WORK_FILE}
+cat ${WORK_FILE} | sort | uniq -c | sort -nr | awk -v mc="${MAX_FAILS}" '$1 > mc {print $2}' | sort
 
